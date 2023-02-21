@@ -1,39 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TerraSharp.Maui.Example.MainPage">
+             x:Class="TerraSharp.Maui.Example.MainPage" Loaded="ContentPage_Loaded"
+             xmlns:viewmodel="clr-namespace:TerraSharp.Maui.Example.ViewModels"
+             xmlns:model="clr-namespace:TerraSharp.Maui.Example.Models"
+             x:DataType="viewmodel:MainViewModel"
+             BackgroundColor="{DynamicResource BackgroundColor}">
 
-    <ScrollView>
+
+    <ContentPage.MenuBarItems >
+        <MenuBarItem Text="File">
+            <MenuFlyoutItem Text="Exit"
+                            Command="{Binding ExitCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="Wallet">
+            <!--<MenuFlyoutSubItem Text="Change Location">
+                <MenuFlyoutItem Text="Redmond, USA"
+                                Command="{Binding ChangeLocationCommand}"
+                                CommandParameter="Redmond" />
+                <MenuFlyoutItem Text="London, UK"
+                                Command="{Binding ChangeLocationCommand}"
+                                CommandParameter="London" />
+                <MenuFlyoutItem Text="Berlin, DE"
+                                Command="{Binding ChangeLocationCommand}"
+                                CommandParameter="Berlin"/>
+            </MenuFlyoutSubItem>-->
+
+            <MenuFlyoutItem Text="Stake"
+                            Command="{Binding StakeCommand}" />
+            <MenuFlyoutItem Text="Swap"
+                            Command="{Binding SwapCommand}" />
+            <MenuFlyoutItem Text="History"
+                            Command="{Binding HistoryCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="Tools">
+            <MenuFlyoutItem Text="Settings"
+                            Command="{Binding SettingsCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="About">
+            <MenuFlyoutItem Text="Test"
+                            Clicked="OnCounterClicked" />
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+
+
+    <ScrollView >
         <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+            
+            VerticalOptions="Start">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            <CollectionView x:Name="collectionView" 
+                        ItemsSource="{Binding Logs}" 
+                        SelectionMode="Single">
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                        <SwipeView>
+
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                           BackgroundColor="{DynamicResource DeleteButtonColor}"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteCommand}"
+                                           CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid  >
+
+                                <Frame BackgroundColor="Transparent"  >
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
+                                           CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Grid x:DataType="model:Log" HorizontalOptions="Fill" ColumnDefinitions=".25*,.25*, .25*, *" >
+                                        <Label Grid.Column="0"  Text="{Binding   Created}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Medium"/>
+                                        <Label Grid.Column="1"  Text="{Binding  Type}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Medium"/>
+                                        <Label Grid.Column="2"  Text="{Binding Message}"  TextColor="{DynamicResource PrimaryTextColor}" FontSize="Medium"/>
+                                        <Label Grid.Column="3"  Text="{Binding  Details}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Medium" />
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>

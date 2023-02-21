@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.Maui.Controls;
+using NBitcoin.RPC;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using Terra.Microsoft.Client;
@@ -8,16 +10,22 @@ using Terra.Microsoft.Client.Core.Constants;
 using Terra.Microsoft.Client.Key;
 using Terra.Microsoft.Extensions.StringExt;
 using Terra.Microsoft.Rest.Tx.Block;
+using TerraSharp.Maui.Example.Data;
+using TerraSharp.Maui.Example.Models;
+using TerraSharp.Maui.Example.ViewModels;
+using TerraSharp.Maui.Example.ViewModels.Helpers;
 
 namespace TerraSharp.Maui.Example
 {
     public partial class MainPage : ContentPage
     {
         int count = 0;
-
-        public MainPage()
+        MainViewModel vm;
+        WalletsDatabase database;
+        public MainPage(WalletsDatabase walletsDatabase)
         {
             InitializeComponent();
+            database = walletsDatabase;
             TerraStartup.InitializeKernel(Terra.Microsoft.Rest.Configuration.Environment.TerraEnvironment.LUNA2TestNet);
         }
 
@@ -38,9 +46,21 @@ namespace TerraSharp.Maui.Example
                 // Define the recipient address
                 var rAddr = "terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp";
 
-                //// Define your wallet -- The account that will handle the transactions
-                ///
-                var wallet = TerraStartup.GetLCDClient().CreateWallet(mnemonic);
+                // Define your wallet -- The account that will handle the transactions
+                var wallet = TerraServices.CreateWallet(mnemonic);
+
+                var coins = await TerraServices.GetBalances(mnemonic.AccAddress);
+
+                foreach(var coin in coins)
+                {
+                    vm.Logs.Add(new Models.Log
+                    {
+                        Created = DateTime.Now,
+                        Details = coin.denom.Trim('u').ToUpper(),
+                        Message = coin.amount.ToString(),
+                        Type = LogTypes.Bank,
+                    });
+                }
 
                 var send = new MsgSend(
                   mnemonic.AccAddress,
@@ -61,8 +81,40 @@ namespace TerraSharp.Maui.Example
                         msgs);
 
                 var broadcast = await wallet.broadcastTx.Broadcast(txAfterGas);
-                Debug.WriteLine("RawLog: " + broadcast.Raw_log.ToString());
+                vm.Logs.Add(new Models.Log
+                {
+                    Created = DateTime.Now,
+                    Details = broadcast.Raw_log.ToString(),
+                    Message = "RawLog",
+                    Type = LogTypes.Transaction,
+                });
+                //await DisplayAlert("Result", broadcast.Raw_log.ToString(), "OK");
             });
+
+        }
+        private async void ContentPage_Loaded(object sender, EventArgs e)
+        {
+            vm = new MainViewModel();
+            collectionView.ItemsSource = vm.Logs;
+            
+            vm.Logs.Add(new Models.Log
+            {
+                Created = DateTime.Now,
+                Details = "Application started",
+                Message = "Start",
+                Type = LogTypes.Information,
+            });
+
+            WalletsDatabase wdb = new WalletsDatabase();
+
+            await wdb.SaveLogItemAsync(new Models.Log
+            {
+                Created = DateTime.Now,
+                Details = "Application started",
+                Message = "Start",
+                Type = LogTypes.Information
+            });
+
         }
     }
 }
