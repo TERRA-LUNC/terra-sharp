@@ -15,7 +15,7 @@ using TerraSharp.Maui.Example.Models;
 using TerraSharp.Maui.Example.ViewModels;
 using TerraSharp.Maui.Example.ViewModels.Helpers;
 
-namespace TerraSharp.Maui.Example
+namespace TerraSharp.Maui.Example.Pages
 {
     public partial class MainPage : ContentPage
     {

@@ -50,6 +50,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <MauiXaml Remove="MainTabbed.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
     <PackageReference Include="Crypto.RIPEMD" Version="1.0.3" />
     <PackageReference Include="Cryptography.ECDSA.Secp256k1" Version="1.1.3" />
@@ -94,6 +98,9 @@
     <MauiXaml Update="Resources\Themes\SharedStyles.xaml">
       <Generator></Generator>
       <CopyToOutputDirectory></CopyToOutputDirectory>
+    </MauiXaml>
+    <MauiXaml Update="Pages\Stake.xaml">
+      <Generator></Generator>
     </MauiXaml>
   </ItemGroup>
 </Project>

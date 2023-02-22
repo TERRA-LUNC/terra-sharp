@@ -1,20 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TerraSharp.Maui.Example.MainPage" Loaded="ContentPage_Loaded"
+             x:Class="TerraSharp.Maui.Example.Pages.MainPage" 
+             Loaded="ContentPage_Loaded"
              xmlns:viewmodel="clr-namespace:TerraSharp.Maui.Example.ViewModels"
              xmlns:model="clr-namespace:TerraSharp.Maui.Example.Models"
              x:DataType="viewmodel:MainViewModel"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
 
-    <ContentPage.MenuBarItems >
+    <!--<ContentPage.MenuBarItems >
         <MenuBarItem Text="File">
             <MenuFlyoutItem Text="Exit"
                             Command="{Binding ExitCommand}" />
         </MenuBarItem>
         <MenuBarItem Text="Wallet">
-            <!--<MenuFlyoutSubItem Text="Change Location">
+            --><!--<MenuFlyoutSubItem Text="Change Location">
                 <MenuFlyoutItem Text="Redmond, USA"
                                 Command="{Binding ChangeLocationCommand}"
                                 CommandParameter="Redmond" />
@@ -24,7 +25,7 @@
                 <MenuFlyoutItem Text="Berlin, DE"
                                 Command="{Binding ChangeLocationCommand}"
                                 CommandParameter="Berlin"/>
-            </MenuFlyoutSubItem>-->
+            </MenuFlyoutSubItem>--><!--
 
             <MenuFlyoutItem Text="Stake"
                             Command="{Binding StakeCommand}" />
@@ -41,7 +42,7 @@
             <MenuFlyoutItem Text="Test"
                             Clicked="OnCounterClicked" />
         </MenuBarItem>
-    </ContentPage.MenuBarItems>
+    </ContentPage.MenuBarItems>-->
 
 
     <ScrollView >
@@ -49,10 +50,16 @@
             
             VerticalOptions="Start">
 
+            <Button
+                x:Name="CounterBtn"
+                Text="Click me"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Center" />
+            
             <CollectionView x:Name="collectionView" 
                         ItemsSource="{Binding Logs}" 
                         SelectionMode="Single">
-
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
