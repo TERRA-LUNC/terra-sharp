@@ -24,6 +24,8 @@ namespace TerraSharp.Maui.Example.Models
 
         [MaxLength(250)]
         public string? Details { get; set; }
+
+        public string? Image { get; set; }
     }
 
     public static class LogTypes
