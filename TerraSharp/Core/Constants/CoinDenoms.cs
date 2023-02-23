@@ -76,4 +76,5 @@ namespace Terra.Microsoft.Client.Core.Constants
         public const string UCAD = "ucad";
 
     }
+
 }
