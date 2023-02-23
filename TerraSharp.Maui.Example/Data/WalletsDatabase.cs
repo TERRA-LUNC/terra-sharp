@@ -25,19 +25,25 @@ namespace TerraSharp.Maui.Example.Data
             await Database.CreateTableAsync<Wallet>();
             await Database.CreateTableAsync<Log>();
         }
-        public async Task<List<Wallet>> GetItemsAsync()
+        public async Task<List<Wallet>> GetWalletsAsync()
         {
             await Init();
             return await Database.Table<Wallet>().ToListAsync();
         }
 
-        public async Task<Wallet> GetItemAsync(int id)
+        public async Task<List<Log>> GetLogsAsync()
+        {
+            await Init();
+            return await Database.Table<Log>().ToListAsync();
+        }
+
+        public async Task<Wallet> GetWalletByIdAsync(int id)
         {
             await Init();
             return await Database.Table<Wallet>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<int> SaveItemAsync(Wallet item)
+        public async Task<int> SaveWalletAsync(Wallet item)
         {
             await Init();
             if (item.Id != 0)
@@ -46,7 +52,7 @@ namespace TerraSharp.Maui.Example.Data
                 return await Database.InsertAsync(item);
         }
 
-        public async Task<int> DeleteItemAsync(Wallet item)
+        public async Task<int> DeleteWalletAsync(Wallet item)
         {
             await Init();
             return await Database.DeleteAsync(item);

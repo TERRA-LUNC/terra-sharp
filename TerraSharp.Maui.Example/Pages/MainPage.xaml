@@ -6,45 +6,10 @@
              xmlns:viewmodel="clr-namespace:TerraSharp.Maui.Example.ViewModels"
              xmlns:model="clr-namespace:TerraSharp.Maui.Example.Models"
              x:DataType="viewmodel:MainViewModel"
-             BackgroundColor="{DynamicResource BackgroundColor}">
+             BackgroundColor="{DynamicResource BackgroundColor}" Title="Dashboard">
 
 
-    <!--<ContentPage.MenuBarItems >
-        <MenuBarItem Text="File">
-            <MenuFlyoutItem Text="Exit"
-                            Command="{Binding ExitCommand}" />
-        </MenuBarItem>
-        <MenuBarItem Text="Wallet">
-            --><!--<MenuFlyoutSubItem Text="Change Location">
-                <MenuFlyoutItem Text="Redmond, USA"
-                                Command="{Binding ChangeLocationCommand}"
-                                CommandParameter="Redmond" />
-                <MenuFlyoutItem Text="London, UK"
-                                Command="{Binding ChangeLocationCommand}"
-                                CommandParameter="London" />
-                <MenuFlyoutItem Text="Berlin, DE"
-                                Command="{Binding ChangeLocationCommand}"
-                                CommandParameter="Berlin"/>
-            </MenuFlyoutSubItem>--><!--
-
-            <MenuFlyoutItem Text="Stake"
-                            Command="{Binding StakeCommand}" />
-            <MenuFlyoutItem Text="Swap"
-                            Command="{Binding SwapCommand}" />
-            <MenuFlyoutItem Text="History"
-                            Command="{Binding HistoryCommand}" />
-        </MenuBarItem>
-        <MenuBarItem Text="Tools">
-            <MenuFlyoutItem Text="Settings"
-                            Command="{Binding SettingsCommand}" />
-        </MenuBarItem>
-        <MenuBarItem Text="About">
-            <MenuFlyoutItem Text="Test"
-                            Clicked="OnCounterClicked" />
-        </MenuBarItem>
-    </ContentPage.MenuBarItems>-->
-
-
+   
     <ScrollView >
         <VerticalStackLayout
             
@@ -68,7 +33,7 @@
 
                             <SwipeView.RightItems>
                                 <SwipeItems>
-                                    <SwipeItem Text="Delete"
+                                    <SwipeItem Text="Delete" IconImageSource="delete.png"
                                            BackgroundColor="{DynamicResource DeleteButtonColor}"
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteCommand}"
                                            CommandParameter="{Binding .}"/>
@@ -83,10 +48,14 @@
                                            CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
                                     <Grid x:DataType="model:Log" HorizontalOptions="Fill" ColumnDefinitions=".25*,.25*, .25*, *" >
-                                        <Label Grid.Column="0"  Text="{Binding   Created}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Medium"/>
-                                        <Label Grid.Column="1"  Text="{Binding  Type}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Medium"/>
-                                        <Label Grid.Column="2"  Text="{Binding Message}"  TextColor="{DynamicResource PrimaryTextColor}" FontSize="Medium"/>
-                                        <Label Grid.Column="3"  Text="{Binding  Details}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Medium" />
+                                        <Label Grid.Column="0"  Text="{Binding   Created}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body">
+											<Label.FormattedText>
+												<FormattedString/>
+											</Label.FormattedText>
+                                        </Label>
+                                        <Label Grid.Column="1"  Text="{Binding  Type}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>
+                                        <Label Grid.Column="2"  Text="{Binding Message}"  TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>
+                                        <Label Grid.Column="3"  Text="{Binding  Details}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body" />
                                     </Grid>
                                 </Frame>
                             </Grid>

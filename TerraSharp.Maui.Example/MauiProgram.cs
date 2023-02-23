@@ -13,8 +13,10 @@ namespace TerraSharp.Maui.Example
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("Gotham-Light.ttf", "Gotham-Light");
+                    fonts.AddFont("Gotham-Medium.ttf", "Gotham-Medium");
+                    fonts.AddFont("Gotham-Bold.ttf", "Gotham-Bold");
+                    fonts.AddFont("Gotham-Book.ttf", "Gotham-Book");
                 });
 
             builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);

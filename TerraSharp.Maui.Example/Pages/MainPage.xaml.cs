@@ -1,14 +1,8 @@
-﻿
-using Microsoft.Maui.Controls;
-using NBitcoin.RPC;
-using Newtonsoft.Json;
-using System.Diagnostics;
-using Terra.Microsoft.Client;
+﻿using Terra.Microsoft.Client;
 using Terra.Microsoft.Client.Core;
 using Terra.Microsoft.Client.Core.Bank.Msgs;
 using Terra.Microsoft.Client.Core.Constants;
 using Terra.Microsoft.Client.Key;
-using Terra.Microsoft.Extensions.StringExt;
 using Terra.Microsoft.Rest.Tx.Block;
 using TerraSharp.Maui.Example.Data;
 using TerraSharp.Maui.Example.Models;
@@ -51,13 +45,14 @@ namespace TerraSharp.Maui.Example.Pages
 
                 var coins = await TerraServices.GetBalances(mnemonic.AccAddress);
 
+
                 foreach(var coin in coins)
                 {
                     vm.Logs.Add(new Models.Log
                     {
                         Created = DateTime.Now,
                         Details = coin.denom.Trim('u').ToUpper(),
-                        Message = coin.amount.ToString(),
+                        Message = Convert.ToDecimal(coin.amount/1000000).ToString(),
                         Type = LogTypes.Bank,
                     });
                 }
@@ -96,7 +91,15 @@ namespace TerraSharp.Maui.Example.Pages
         {
             vm = new MainViewModel();
             collectionView.ItemsSource = vm.Logs;
-            
+
+            WalletsDatabase wdb = new WalletsDatabase();
+            //var existingLogs = await wdb.GetLogsAsync();
+
+            //foreach (var existingLog in existingLogs)
+            //{
+            //    vm.Logs.Add(existingLog);
+            //}
+
             vm.Logs.Add(new Models.Log
             {
                 Created = DateTime.Now,
@@ -105,7 +108,6 @@ namespace TerraSharp.Maui.Example.Pages
                 Type = LogTypes.Information,
             });
 
-            WalletsDatabase wdb = new WalletsDatabase();
 
             await wdb.SaveLogItemAsync(new Models.Log
             {
