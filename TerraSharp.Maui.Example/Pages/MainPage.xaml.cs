@@ -1,9 +1,12 @@
-﻿using Terra.Microsoft.Client;
+﻿using System;
+using System.IO;
+using Terra.Microsoft.Client;
 using Terra.Microsoft.Client.Core;
 using Terra.Microsoft.Client.Core.Bank.Msgs;
 using Terra.Microsoft.Client.Core.Constants;
 using Terra.Microsoft.Client.Key;
 using Terra.Microsoft.Rest.Tx.Block;
+using TerraSharp.Core;
 using TerraSharp.Maui.Example.Data;
 using TerraSharp.Maui.Example.Models;
 using TerraSharp.Maui.Example.ViewModels;
@@ -45,16 +48,32 @@ namespace TerraSharp.Maui.Example.Pages
 
                 var coins = await TerraServices.GetBalances(mnemonic.AccAddress);
 
-
-                foreach(var coin in coins)
+                
+                foreach (var coin in coins)
                 {
-                    vm.Logs.Add(new Models.Log
+                    
+                    var options = CoinDenomExtension.GetCoinDenomOptions(coin.denom);
+                    if (options != null)
                     {
-                        Created = DateTime.Now,
-                        Details = coin.denom.Trim('u').ToUpper(),
-                        Message = Convert.ToDecimal(coin.amount/1000000).ToString(),
-                        Type = LogTypes.Bank,
-                    });
+                        var byteArray = new HttpClient().GetByteArrayAsync(options.ImageUrl).Result;
+
+                        vm.Logs.Add(new Models.Log
+                        {
+                            Created = DateTime.Now,
+                            Details = options.Description,
+                            Message = Convert.ToDecimal(coin.amount / 1000000).ToString(),
+                            Type = LogTypes.Bank,
+                            Image =  new Image()
+                            {
+                                Source  = ImageSource.FromStream(() => new MemoryStream(byteArray))
+
+                            },
+                        });
+
+
+                    }
+
+                       
                 }
 
                 var send = new MsgSend(

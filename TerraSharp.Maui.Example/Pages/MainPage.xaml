@@ -9,7 +9,7 @@
              BackgroundColor="{DynamicResource BackgroundColor}" Title="Dashboard">
 
 
-   
+
     <ScrollView >
         <VerticalStackLayout
             
@@ -21,7 +21,7 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
-            
+
             <CollectionView x:Name="collectionView" 
                         ItemsSource="{Binding Logs}" 
                         SelectionMode="Single">
@@ -47,15 +47,17 @@
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
                                            CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
-                                    <Grid x:DataType="model:Log" HorizontalOptions="Fill" ColumnDefinitions=".25*,.25*, .25*, *" >
-                                        <Label Grid.Column="0"  Text="{Binding   Created}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body">
-											<Label.FormattedText>
-												<FormattedString/>
-											</Label.FormattedText>
-                                        </Label>
+                                    <Grid x:DataType="model:Log" HorizontalOptions="Fill" ColumnDefinitions=".25*,.22*, .15*, .15*,*" >
+                                        <Label Grid.Column="0"  Text="{Binding Path=Created, StringFormat='{}{0:dd.MM.yyyy HH.mm}'}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"></Label>
                                         <Label Grid.Column="1"  Text="{Binding  Type}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>
                                         <Label Grid.Column="2"  Text="{Binding Message}"  TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>
-                                        <Label Grid.Column="3"  Text="{Binding  Details}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body" />
+                                        <Image Grid.Column="3" Aspect="AspectFit" Margin="1" WidthRequest="22" HeightRequest="22"  Source="wallet.png" />
+                                        
+                                        <Label Grid.Column="4"  Text="{Binding  Details}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body" />
+                                        
+                                        
+                                    
+
                                     </Grid>
                                 </Frame>
                             </Grid>
