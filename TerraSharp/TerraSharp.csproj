@@ -30,6 +30,6 @@
 		<PackageReference Include="Terra.Microsoft.Extensions" Version="1.0.2" />
 		<PackageReference Include="Terra.Microsoft.Keys" Version="1.0.8" />
 		<PackageReference Include="Terra.Microsoft.ProtoBufs" Version="1.0.4" />
-		<PackageReference Include="Terra.Microsoft.Rest" Version="1.0.3" />
+		<PackageReference Include="Terra.Microsoft.Rest" Version="1.0.4" />
 	</ItemGroup>
 </Project>

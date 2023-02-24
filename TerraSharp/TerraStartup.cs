@@ -65,7 +65,7 @@ namespace Terra.Microsoft.Client
                     TerraClientConfiguration.LCDConfig.ChainID = ClassicChainKeys.CLASSIC_MAINNET;
                     break;
                 case TerraEnvironment.ClassicTestNet:
-                    TerraClientConfiguration.BlockchainResourcePath = ResourceUrls.TERRA_REBELS_TESTNET;
+                    TerraClientConfiguration.BlockchainResourcePath = ClassicHttpResources.CLASSIC_TESTNET;
                     TerraClientConfiguration.LCDConfig.ChainID = ClassicChainKeys.TEST_NET;
                     break;
                 case TerraEnvironment.LUNA2TestNet:

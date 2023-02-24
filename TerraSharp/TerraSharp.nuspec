@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>Terra.Microsoft.Client</id>
-		<version>1.0.6</version>
+		<version>1.0.7</version>
 		<title>Terra.Microsoft.Client</title>
     <icon>TerraMystic.png</icon>
 		<authors>Dan Gerchcovich</authors>
