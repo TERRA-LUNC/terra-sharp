@@ -15,8 +15,8 @@
         <VerticalStackLayout
             
             VerticalOptions="Start">
-            <ActivityIndicator IsRunning="true" 
-                   Color="{DynamicResource  PrimaryColor}" />
+            <!--<ActivityIndicator IsRunning="true" 
+                   Color="{DynamicResource  PrimaryColor}" />-->
             <Button
                 x:Name="CounterBtn"
                 Text="Click me"

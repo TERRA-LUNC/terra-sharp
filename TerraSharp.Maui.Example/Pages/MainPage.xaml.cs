@@ -16,7 +16,6 @@ namespace TerraSharp.Maui.Example.Pages
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
         MainViewModel vm;
         WalletsDatabase database;
         public MainPage(WalletsDatabase walletsDatabase)
