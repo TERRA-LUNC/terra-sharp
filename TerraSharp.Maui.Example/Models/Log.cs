@@ -26,7 +26,7 @@ namespace TerraSharp.Maui.Example.Models
         public string? Details { get; set; }
 
         [Ignore]
-        public Image Image { get; set; }
+        public string Image { get; set; }
     }
 
     public static class LogTypes

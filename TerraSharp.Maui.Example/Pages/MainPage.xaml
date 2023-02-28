@@ -61,7 +61,8 @@
                                         <Label Grid.Column="0"  Text="{Binding Path=Created, StringFormat='{}{0:dd.MM.yyyy HH.mm}'}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body" HorizontalTextAlignment="Start"/>
                                         <Label Grid.Column="1"  Text="{Binding  Type}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>
                                         <Label Grid.Column="2"  Text="{Binding Message}"  TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>
-                                        <Image Grid.Column="3"  Margin="0" WidthRequest="22" HeightRequest="22"  Source="wallet.png" />
+                                        <!--Workaround Todo, svg from remote currently not supported in image component-->
+                                        <WebView Grid.Column="3" WidthRequest="22" HeightRequest="22"  Source="{Binding Image}"/>
                                         <Label Grid.Column="4"  Text="{Binding  Details}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body" />
                                         
                                         
