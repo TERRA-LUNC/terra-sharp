@@ -9,12 +9,14 @@
              BackgroundColor="{DynamicResource BackgroundColor}" Title="Dashboard">
 
 
-
+    
     <ScrollView >
+        
         <VerticalStackLayout
             
             VerticalOptions="Start">
-
+            <ActivityIndicator IsRunning="true" 
+                   Color="{DynamicResource  PrimaryColor}" />
             <Button
                 x:Name="CounterBtn"
                 Text="Click me"
@@ -25,7 +27,15 @@
             <CollectionView x:Name="collectionView" 
                         ItemsSource="{Binding Logs}" 
                         SelectionMode="Single">
-
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions=".25*,.25*, .15*, .15*,*" Padding="18,0,0,0" BackgroundColor="{DynamicResource  PrimaryColor}">
+                        <Label Text="Date" Grid.Column="0" HorizontalTextAlignment="Start" TextColor="{DynamicResource  TextColor}"/>
+                        <Label Text="Type" Grid.Column="1" TextColor="{DynamicResource  TextColor}"/>
+                        <Label Text="Message" Grid.Column="2" TextColor="{DynamicResource  TextColor}"/>
+                        <Label Text="" Grid.Column="3" TextColor="{DynamicResource  TextColor}"/>
+                        <Label Text="Details" Grid.Column="4" TextColor="{DynamicResource  TextColor}"/>
+                    </Grid>
+                </CollectionView.Header>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
 
@@ -39,20 +49,19 @@
                                            CommandParameter="{Binding .}"/>
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Grid  >
+                            <Grid    >
 
-                                <Frame BackgroundColor="Transparent"  >
+                                <Frame BackgroundColor="Transparent" >
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer 
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
                                            CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
-                                    <Grid x:DataType="model:Log" HorizontalOptions="Fill" ColumnDefinitions=".25*,.22*, .15*, .15*,*" >
-                                        <Label Grid.Column="0"  Text="{Binding Path=Created, StringFormat='{}{0:dd.MM.yyyy HH.mm}'}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"></Label>
+                                    <Grid x:DataType="model:Log" ColumnDefinitions=".25*,.25*, .15*, .15*,*"  >
+                                        <Label Grid.Column="0"  Text="{Binding Path=Created, StringFormat='{}{0:dd.MM.yyyy HH.mm}'}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body" HorizontalTextAlignment="Start"/>
                                         <Label Grid.Column="1"  Text="{Binding  Type}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>
                                         <Label Grid.Column="2"  Text="{Binding Message}"  TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>
-                                        <Image Grid.Column="3" Aspect="AspectFit" Margin="1" WidthRequest="22" HeightRequest="22"  Source="wallet.png" />
-                                        
+                                        <Image Grid.Column="3"  Margin="0" WidthRequest="22" HeightRequest="22"  Source="wallet.png" />
                                         <Label Grid.Column="4"  Text="{Binding  Details}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body" />
                                         
                                         

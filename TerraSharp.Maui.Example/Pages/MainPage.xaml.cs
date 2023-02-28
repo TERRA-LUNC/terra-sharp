@@ -93,14 +93,14 @@ namespace TerraSharp.Maui.Example.Pages
                 var txAfterGas = await wallet.CreateTxAndSignTx(
                         feeEstimate,
                         msgs);
-
+                
                 var broadcast = await wallet.broadcastTx.Broadcast(txAfterGas);
                 vm.Logs.Add(new Models.Log
                 {
                     Created = DateTime.Now,
                     Details = broadcast.Raw_log.ToString(),
                     Message = "RawLog",
-                    Type = LogTypes.Transaction,
+                    Type = LogTypes.Broadcast,
                 });
                 //await DisplayAlert("Result", broadcast.Raw_log.ToString(), "OK");
             });
@@ -112,12 +112,12 @@ namespace TerraSharp.Maui.Example.Pages
             collectionView.ItemsSource = vm.Logs;
 
             WalletsDatabase wdb = new WalletsDatabase();
-            //var existingLogs = await wdb.GetLogsAsync();
+            var existingLogs = await wdb.GetLogsAsync();
 
-            //foreach (var existingLog in existingLogs)
-            //{
-            //    vm.Logs.Add(existingLog);
-            //}
+            foreach (var existingLog in existingLogs)
+            {
+                vm.Logs.Add(existingLog);
+            }
 
             vm.Logs.Add(new Models.Log
             {
