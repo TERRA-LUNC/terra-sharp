@@ -1,39 +1,7 @@
 
-<p align="center">
-    <a href="https://github.com/TheArchitect123"><img src="CIcon.png" align="center" width=150/></a>
-</p>
 
-<p align="center">
-The Official C# SDK for the Terra Ecosystem (LUNC/USTC/LUNA2)
-</p>
-<br/>
 
-<p align="center">
-  <a href="https://github.com/TerraMystics/terra-sharp/blob/main/LICENSE.md">
-  <img alt="GitHub" src="https://img.shields.io/github/license/terra-money/terra.js">
-  </a>
 
-  <a href="https://www.nuget.org/packages/Terra.Microsoft.Client/1.0.1">
-    <img alt="GitHub" src="https://img.shields.io/nuget/v/Terra.Microsoft.Client">
-  </a>
-  
-  <a href="https://www.nuget.org/packages/Terra.Microsoft.Client/1.0.1">
-    <img alt="GitHub" src="https://img.shields.io/nuget/dt/Terra.Microsoft.Client?color=red">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://docs.terra.money/"><strong>Explore the Docs »</strong></a>
-  <br />
-  <br/>
-  <a href="https://github.com/TerraMystics/terra-sharp/tree/main/TerraSharp.Maui.Example">Example App</a>
-  ·
-  <a href="">API Reference</a>
-  ·
-  <a href="https://www.nuget.org/packages/Terra.Microsoft.Client/1.0.1">Nuget Package</a>
-  ·
-  <a href="https://github.com/terra-rebels/Terra.Microsoft.Client">GitHub</a>
-</p>
 
 Terra.Microsoft.Client is a C# SDK for writing applications that interact with the Terra blockchain from either the Web or Mobile, or .net environments and provides simple abstractions over core data structures, serialization, key management, and API request generation.
 
@@ -144,18 +112,10 @@ async void BroadcastTransaction() {
 }
 ```
 
-## Require Payment Integration for LUNC/USTC?
 
-If you need to integrate with an external payment system or gateway like Apple/Google in app purchases, please make sure to install the [following library](https://github.com/TerraMystics/FiatToLUNC) in your project.
-
-If you require a lightweight on-chain payments library, please make sure to install the [following library](https://github.com/TerraMystics/Terra.Net.OnChainPayments) in your project.
-
-## Terra.Microsoft.Client For Unity Developers
-
-If you are using Terra.Microsoft.Client for Unity, please make sure to install the [following asset](https://github.com/TerraMystics/NuGetForUnity) in your project, and follow the installation instructions above
 
 ## License
 
 This software is licensed under the MIT license. See [LICENSE](./LICENSE) for full disclosure.
 
-© 2022 TerraMystics.
+© 2022 TerraMystics & TERRA-LUNC.
