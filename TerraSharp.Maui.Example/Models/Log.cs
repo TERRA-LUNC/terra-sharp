@@ -25,6 +25,7 @@ namespace TerraSharp.Maui.Example.Models
         [MaxLength(250)]
         public string? Details { get; set; }
 
+        [Ignore]
         public Image Image { get; set; }
     }
 
