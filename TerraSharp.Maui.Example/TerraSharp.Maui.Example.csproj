@@ -59,6 +59,7 @@
     <None Remove="Resources\Fonts\Gotham-Light.ttf" />
     <None Remove="Resources\Fonts\Gotham-Medium.ttf" />
     <None Remove="Resources\Images\delete.png" />
+    <None Remove="Resources\Images\maui.png" />
     <None Remove="Resources\Images\wallet.png" />
   </ItemGroup>
 
