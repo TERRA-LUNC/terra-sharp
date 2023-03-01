@@ -19,14 +19,21 @@
                    Color="{DynamicResource  PrimaryColor}" />-->
             <Button
                 x:Name="CounterBtn"
-                Text="Click me"
+                Text="Test"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"  WidthRequest="96" HeightRequest="96"/>
+
+            <Grid ColumnDefinitions="*,*"  >
+
+                <Image Grid.Column="0" Source="icons8transfertdargent96.png"  WidthRequest="96" HeightRequest="96" ></Image>
+                <Image Grid.Column="1" Source="icons8demandedargent96.png"  WidthRequest="96" HeightRequest="96"></Image>
+
+            </Grid>
 
             <CollectionView x:Name="collectionView" 
                         ItemsSource="{Binding Logs}" 
-                        SelectionMode="Single">
+                        SelectionMode="Single" >
                 <CollectionView.Header>
                     <Grid ColumnDefinitions=".25*,.25*, .15*, .15*,*" Padding="18,0,0,0" BackgroundColor="{DynamicResource  PrimaryColor}">
                         <Label Text="Date" Grid.Column="0" HorizontalTextAlignment="Start" TextColor="{DynamicResource  TextColor}"/>
@@ -37,7 +44,7 @@
                     </Grid>
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate >
 
                         <SwipeView>
 
@@ -49,7 +56,7 @@
                                            CommandParameter="{Binding .}"/>
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Grid    >
+                            <Grid >
 
                                 <Frame BackgroundColor="Transparent" >
                                     <Frame.GestureRecognizers>

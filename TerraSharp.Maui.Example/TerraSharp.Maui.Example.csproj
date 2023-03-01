@@ -58,9 +58,45 @@
     <None Remove="Resources\Fonts\Gotham-Book.ttf" />
     <None Remove="Resources\Fonts\Gotham-Light.ttf" />
     <None Remove="Resources\Fonts\Gotham-Medium.ttf" />
+    <None Remove="Resources\Images\20210923154100_001.pdf" />
+    <None Remove="Resources\Images\20210923154500_001 (1).pdf" />
+    <None Remove="Resources\Images\Adobe Acrobat.lnk" />
+    <None Remove="Resources\Images\avatar.pdf" />
+    <None Remove="Resources\Images\Binance.lnk" />
+    <None Remove="Resources\Images\Box.lnk" />
+    <None Remove="Resources\Images\CCF23122019.pdf" />
+    <None Remove="Resources\Images\D40_5541_feqoen.webp" />
+    <None Remove="Resources\Images\D40_5544_gm1p1t.webp" />
+    <None Remove="Resources\Images\debitInterestCertificate_LU810141842077230000_20210101_20211231 (2).pdf" />
     <None Remove="Resources\Images\delete.png" />
+    <None Remove="Resources\Images\DualAuthLx1.txt" />
+    <None Remove="Resources\Images\ECDsaCng C# (CSharp) Code Examples - HotExamples.url" />
+    <None Remove="Resources\Images\ECDsaCng, System.Security.Cryptography C# (CSharp) Code Examples - HotExamples.url" />
+    <None Remove="Resources\Images\ECDsaCng.VerifyData Method (System.Security.Cryptography) - Microsoft Learn.url" />
+    <None Remove="Resources\Images\EPREUVE3-Panneau-Cimetière-Berdorf.pdf" />
+    <None Remove="Resources\Images\HD1(GPS) v2.18.lnk" />
+    <None Remove="Resources\Images\HD1(GPS) v2.23.lnk" />
+    <None Remove="Resources\Images\icons8demandedargent48.png" />
+    <None Remove="Resources\Images\icons8demandedargent96.png" />
+    <None Remove="Resources\Images\icons8transfertdargent48.png" />
+    <None Remove="Resources\Images\icons8transfertdargent96.png" />
+    <None Remove="Resources\Images\ID-51E_PLUS2_IM_D_advanced_20161205.pdf" />
     <None Remove="Resources\Images\maui.png" />
+    <None Remove="Resources\Images\MBA_Finance_Degree_Training_Book.pdf" />
+    <None Remove="Resources\Images\MetaEditor 5.lnk" />
+    <None Remove="Resources\Images\Microsoft Edge.lnk" />
+    <None Remove="Resources\Images\Musique - Raccourci.lnk" />
+    <None Remove="Resources\Images\Notepad++.lnk" />
+    <None Remove="Resources\Images\passpor.pdf" />
+    <None Remove="Resources\Images\Project_Management_Revealed_by_IO4PM_International_Organization_For_Project_Management.pdf" />
+    <None Remove="Resources\Images\pwc-aml-090218.pdf" />
+    <None Remove="Resources\Images\Rebel Station.lnk" />
+    <None Remove="Resources\Images\Terra Station.lnk" />
+    <None Remove="Resources\Images\timesheet122022.pdf" />
+    <None Remove="Resources\Images\tx" />
+    <None Remove="Resources\Images\VCApp.code-workspace" />
     <None Remove="Resources\Images\wallet.png" />
+    <None Remove="Resources\Images\XM Global MT5.lnk" />
   </ItemGroup>
 
   <ItemGroup>
