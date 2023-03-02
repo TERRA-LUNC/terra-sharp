@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
 using Terra.Microsoft.Client;
 using Terra.Microsoft.Client.Core;
@@ -22,7 +23,7 @@ namespace TerraSharp.Maui.Example.Pages
         {
             InitializeComponent();
             database = walletsDatabase;
-            TerraStartup.InitializeKernel(Terra.Microsoft.Rest.Configuration.Environment.TerraEnvironment.LUNA2TestNet);
+            TerraStartup.InitializeKernel(Terra.Microsoft.Rest.Configuration.Environment.TerraEnvironment.Classic);
         }
 
         private void OnCounterClicked(object sender, EventArgs e)
@@ -36,11 +37,10 @@ namespace TerraSharp.Maui.Example.Pages
                 //Mnemonic = "quality vacuum heart guard buzz spike sight swarm shove special gym robust assume sudden deposit grid alcohol choice devote leader tilt noodle tide penalty"
 
                 // Create a key out of a mnemonic
-                var mnemonic = new TxMnemonic("notice oak worry limit wrap speak medal online prefer cluster " +
-                    "roof addict wrist behave treat actual wasp year salad speed social layer crew genius");
+                var mnemonic = new TxMnemonic("desert excite employ minute exile flash finish inmate bleak alter bid raise resource spatial crumble spread toddler exit inflict soup real draft analyst illegal");
 
                 // Define the recipient address
-                var rAddr = "terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp";
+                var rAddr = "terra1g9flaqfprlx2a62nm4k9c80u5e4alv8ghk6nwr";
 
                 // Define your wallet -- The account that will handle the transactions
                 var wallet = TerraServices.CreateWallet(mnemonic);
@@ -87,7 +87,9 @@ namespace TerraSharp.Maui.Example.Pages
                 var txAfterGas = await wallet.CreateTxAndSignTx(
                         feeEstimate,
                         msgs);
+                System.Diagnostics.Debug.WriteLine($"JSON: \n {JsonConvert.SerializeObject(txAfterGas)}");
                 
+
                 var broadcast = await wallet.broadcastTx.Broadcast(txAfterGas);
                 vm.Logs.Add(new Models.Log
                 {
