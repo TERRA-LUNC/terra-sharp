@@ -13,6 +13,7 @@ using TerraSharp.Maui.Example.Models;
 using TerraSharp.Maui.Example.ViewModels;
 using TerraSharp.Maui.Example.ViewModels.Helpers;
 
+
 namespace TerraSharp.Maui.Example.Pages
 {
     public partial class MainPage : ContentPage
@@ -28,6 +29,7 @@ namespace TerraSharp.Maui.Example.Pages
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
+            BlockTxBroadcastResultDataArgs result = new BlockTxBroadcastResultDataArgs();
             Task.Run(async () =>
             {
 
@@ -78,29 +80,24 @@ namespace TerraSharp.Maui.Example.Pages
                 var msgs = new object[] { send };
 
                 var gas = await wallet.EstimateGasForTx(msgs, 1 * 1e6);
+                System.Diagnostics.Debug.WriteLine($"Gas : {gas}");
                 var feeEstimate = await wallet.EstimateFeeForTx(new CreateTxOptions()
                 {
                     gas = gas,
                     feeDenom = CoinDenoms.ULUNA,
                 });
 
+                System.Diagnostics.Debug.WriteLine($"feeEstimate : {feeEstimate.amount.First().amount}");
                 var txAfterGas = await wallet.CreateTxAndSignTx(
                         feeEstimate,
                         msgs);
                 System.Diagnostics.Debug.WriteLine($"JSON: \n {JsonConvert.SerializeObject(txAfterGas)}");
+
+
+                result = await wallet.broadcastTx.Broadcast(txAfterGas);
                 
-
-                var broadcast = await wallet.broadcastTx.Broadcast(txAfterGas);
-                vm.Logs.Add(new Models.Log
-                {
-                    Created = DateTime.Now,
-                    Details = broadcast.Raw_log.ToString(),
-                    Message = "RawLog",
-                    Type = LogTypes.Broadcast,
-                });
-                //await DisplayAlert("Result", broadcast.Raw_log.ToString(), "OK");
-            });
-
+            }).Wait();
+            DisplayAlert("Result", result.Raw_log.ToString(), "OK");
         }
         private async void ContentPage_Loaded(object sender, EventArgs e)
         {
