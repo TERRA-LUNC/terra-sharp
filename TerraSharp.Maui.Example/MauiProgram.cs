@@ -1,4 +1,5 @@
-﻿using TerraSharp.Maui.Example.Data;
+﻿using SkiaSharp.Views.Maui.Controls.Hosting;
+using TerraSharp.Maui.Example.Data;
 using TerraSharp.Maui.Example.Pages;
 using TerraSharp.Maui.Example.ViewModels;
 
@@ -10,6 +11,7 @@ namespace TerraSharp.Maui.Example
         {
             var builder = MauiApp.CreateBuilder();
             builder
+                .UseSkiaSharp(true)
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {

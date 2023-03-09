@@ -1,6 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using LiveChartsCore;
+using LiveChartsCore.Measure;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using Newtonsoft.Json;
+using SkiaSharp;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Net.WebSockets;
 using Terra.Microsoft.Client;
 using Terra.Microsoft.Client.Core;
 using Terra.Microsoft.Client.Core.Bank.Msgs;
@@ -12,7 +19,7 @@ using TerraSharp.Maui.Example.Data;
 using TerraSharp.Maui.Example.Models;
 using TerraSharp.Maui.Example.ViewModels;
 using TerraSharp.Maui.Example.ViewModels.Helpers;
-
+using TerraSharp.Maui.Example.ViewModels.Models;
 
 namespace TerraSharp.Maui.Example.Pages
 {
@@ -80,18 +87,18 @@ namespace TerraSharp.Maui.Example.Pages
                 var msgs = new object[] { send };
 
                 var gas = await wallet.EstimateGasForTx(msgs, 1 * 1e6);
-                System.Diagnostics.Debug.WriteLine($"Gas : {gas}");
+                Debug.WriteLine($"Gas : {gas}");
                 var feeEstimate = await wallet.EstimateFeeForTx(new CreateTxOptions()
                 {
                     gas = gas,
                     feeDenom = CoinDenoms.ULUNA,
                 });
-
-                System.Diagnostics.Debug.WriteLine($"feeEstimate : {feeEstimate.amount.First().amount}");
+                //vm.WalletAmounts.Add(new WalletTotal { Amount = 45, CoinDenoms = "Luna" });
+                Debug.WriteLine($"feeEstimate : {feeEstimate.amount.First().amount}");
                 var txAfterGas = await wallet.CreateTxAndSignTx(
                         feeEstimate,
                         msgs);
-                System.Diagnostics.Debug.WriteLine($"JSON: \n {JsonConvert.SerializeObject(txAfterGas)}");
+                Debug.WriteLine($"JSON: \n {JsonConvert.SerializeObject(txAfterGas)}");
 
 
                 result = await wallet.broadcastTx.Broadcast(txAfterGas);
@@ -103,6 +110,9 @@ namespace TerraSharp.Maui.Example.Pages
         {
             vm = new MainViewModel();
             collectionView.ItemsSource = vm.Logs;
+            pieChart1.BindingContext = vm;
+
+
 
             WalletsDatabase wdb = new WalletsDatabase();
             var existingLogs = await wdb.GetLogsAsync();

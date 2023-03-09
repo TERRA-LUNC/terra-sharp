@@ -1,4 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using LiveChartsCore.Measure;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,20 +10,34 @@ using System.Text;
 using System.Threading.Tasks;
 using Terra.Microsoft.Client.Core;
 using TerraSharp.Maui.Example.Models;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
+using LiveChartsCore.Defaults;
+using TerraSharp.Maui.Example.ViewModels.Models;
 
 namespace TerraSharp.Maui.Example.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
-
         public ObservableCollection<Log> Logs { get; set; } = new ObservableCollection<Log>();
-
         public ObservableCollection<Coin[]> Coins { get; set; } = new ObservableCollection<Coin[]>();
+
+        public IEnumerable<ISeries> Series { get; set; } = new GaugeBuilder()
+            .WithLabelsPosition(PolarLabelsPosition.Start)
+            .WithLabelFormatter(point => point.PrimaryValue + " " + point.Context.Series.Name)
+            .WithLabelsSize(20)
+            .WithInnerRadius(20)
+            .WithOffsetRadius(8)
+            .WithBackgroundInnerRadius(20)
+            //.AddValue(100, "*")
+            .AddValue(39.5, "USTC")
+            .AddValue(923.78, "LUNC")
+            .BuildSeries();
+
         public string _ApplicationName;
-        IConnectivity connectivity;
+
         public MainViewModel()
         {
-
         }
         public string ApplicationName
         {

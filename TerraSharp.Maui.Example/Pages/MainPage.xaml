@@ -5,11 +5,10 @@
              Loaded="ContentPage_Loaded"
              xmlns:viewmodel="clr-namespace:TerraSharp.Maui.Example.ViewModels"
              xmlns:model="clr-namespace:TerraSharp.Maui.Example.Models"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              x:DataType="viewmodel:MainViewModel"
              BackgroundColor="{DynamicResource BackgroundColor}" Title="Dashboard">
-
-
-    
+  
     <ScrollView >
         
         <VerticalStackLayout
@@ -23,16 +22,18 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center"  WidthRequest="96" HeightRequest="96"/>
+            
+            <Grid ColumnDefinitions="*,*,*"  >
+                <lvc:PieChart x:Name="pieChart1" Series="{Binding Series}" InitialRotation="45" MaxAngle="270" Total="100" WidthRequest="150" HeightRequest="150" >
 
-            <Grid ColumnDefinitions="*,*"  >
-
-                <Image Grid.Column="0" Source="icons8transfertdargent96.png"  WidthRequest="96" HeightRequest="96" ></Image>
-                <Image Grid.Column="1" Source="icons8demandedargent96.png"  WidthRequest="96" HeightRequest="96"></Image>
+                </lvc:PieChart>
+                <Image Grid.Column="1" Source="icons8transfertdargent96.png"  WidthRequest="96" HeightRequest="96" ></Image>
+                <Image Grid.Column="2" Source="icons8demandedargent96.png"  WidthRequest="96" HeightRequest="96"></Image>
 
             </Grid>
 
             <CollectionView x:Name="collectionView" 
-                        ItemsSource="{Binding Logs}" 
+                        
                         SelectionMode="Single" >
                 <CollectionView.Header>
                     <Grid ColumnDefinitions=".25*,.25*, .15*, .15*,*" Padding="18,0,0,0" BackgroundColor="{DynamicResource  PrimaryColor}">
