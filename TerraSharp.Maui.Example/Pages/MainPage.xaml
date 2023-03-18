@@ -21,11 +21,24 @@
                 Text="Test"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
-                HorizontalOptions="Center"  WidthRequest="96" HeightRequest="96"/>
-            
+                HorizontalOptions="End"  VerticalOptions="Center" WidthRequest="96" HeightRequest="96"/>
+            <Picker x:Name="picker" HorizontalOptions="Center" VerticalOptions="Center"
+              Title="Select a wallet" >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Baboon</x:String>
+                        <x:String>Capuchin Monkey</x:String>
+                        <x:String>Blue Monkey</x:String>
+                        <x:String>Squirrel Monkey</x:String>
+                        <x:String>Golden Lion Tamarin</x:String>
+                        <x:String>Howler Monkey</x:String>
+                        <x:String>Japanese Macaque</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
             <Grid ColumnDefinitions="*,*,*"  >
-                <lvc:PieChart x:Name="pieChart1" Series="{Binding Series}" InitialRotation="45" MaxAngle="270" Total="100" WidthRequest="150" HeightRequest="150" >
-
+                <lvc:PieChart x:Name="pieChart1" Series="{Binding Series}" InitialRotation="45" Total="{Binding ObservableValueTotal}" MaxAngle="270" 
+                              LegendPosition="Bottom"  WidthRequest="220" HeightRequest="220" >
                 </lvc:PieChart>
                 <Image Grid.Column="1" Source="icons8transfertdargent96.png"  WidthRequest="96" HeightRequest="96" ></Image>
                 <Image Grid.Column="2" Source="icons8demandedargent96.png"  WidthRequest="96" HeightRequest="96"></Image>

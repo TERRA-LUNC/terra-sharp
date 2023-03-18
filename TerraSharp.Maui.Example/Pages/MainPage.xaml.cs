@@ -3,7 +3,6 @@ using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using Newtonsoft.Json;
-using SkiaSharp;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -19,21 +18,24 @@ using TerraSharp.Maui.Example.Data;
 using TerraSharp.Maui.Example.Models;
 using TerraSharp.Maui.Example.ViewModels;
 using TerraSharp.Maui.Example.ViewModels.Helpers;
-using TerraSharp.Maui.Example.ViewModels.Models;
+
 
 namespace TerraSharp.Maui.Example.Pages
 {
     public partial class MainPage : ContentPage
     {
         MainViewModel vm;
-        WalletsDatabase database;
-        public MainPage(WalletsDatabase walletsDatabase)
+        public MainPage()
         {
             InitializeComponent();
-            database = walletsDatabase;
-            TerraStartup.InitializeKernel(Terra.Microsoft.Rest.Configuration.Environment.TerraEnvironment.Classic);
-        }
+            TerraStartup.InitializeKernel(Terra.Microsoft.Rest.Configuration.Environment.TerraEnvironment.LUNA2TestNet);
 
+        }
+        /// <summary>
+        /// OnCounterClicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnCounterClicked(object sender, EventArgs e)
         {
             BlockTxBroadcastResultDataArgs result = new BlockTxBroadcastResultDataArgs();
@@ -55,29 +57,35 @@ namespace TerraSharp.Maui.Example.Pages
                 var wallet = TerraServices.CreateWallet(mnemonic);
 
                 var coins = await TerraServices.GetBalances(mnemonic.AccAddress);
+                var stakedCoins = await TerraServices.GetStaked(mnemonic.AccAddress);
+                vm.ObservableValueStaked.Value = stakedCoins.FirstOrDefault() == null ? 0 : stakedCoins.FirstOrDefault().balance.amount;
 
-                
+
                 foreach (var coin in coins)
                 {
-                    
+
                     var options = CoinDenomExtension.GetCoinDenomOptions(coin.denom);
+
+                    vm.ObservableValueLunc.Value = coin.amount / 1e6;
+
                     if (options != null)
                     {
-                        
+
                         vm.Logs.Add(new Models.Log
                         {
                             Created = DateTime.Now,
                             Details = options.Description,
                             Message = Convert.ToDecimal(coin.amount / 1000000).ToString(),
                             Type = LogTypes.Bank,
-                            Image = options.ImageUrl 
+                            Image = options.ImageUrl
                         });
 
 
                     }
 
-                       
+
                 }
+                vm.ObservableValueTotal.Value = vm.ObservableValueStaked.Value + vm.ObservableValueLunc.Value;
 
                 var send = new MsgSend(
                   mnemonic.AccAddress,
@@ -102,10 +110,15 @@ namespace TerraSharp.Maui.Example.Pages
 
 
                 result = await wallet.broadcastTx.Broadcast(txAfterGas);
-                
+
             }).Wait();
             DisplayAlert("Result", result.Raw_log.ToString(), "OK");
         }
+        /// <summary>
+        /// ContentPage_Loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void ContentPage_Loaded(object sender, EventArgs e)
         {
             vm = new MainViewModel();
@@ -117,10 +130,10 @@ namespace TerraSharp.Maui.Example.Pages
             WalletsDatabase wdb = new WalletsDatabase();
             var existingLogs = await wdb.GetLogsAsync();
 
-            //foreach (var existingLog in existingLogs)
-            //{
-            //    vm.Logs.Add(existingLog);
-            //}
+            foreach (var existingLog in existingLogs)
+            {
+                vm.Logs.Add(existingLog);
+            }
 
             vm.Logs.Add(new Models.Log
             {

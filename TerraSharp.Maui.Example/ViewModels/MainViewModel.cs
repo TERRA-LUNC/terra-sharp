@@ -13,7 +13,6 @@ using TerraSharp.Maui.Example.Models;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using LiveChartsCore.Defaults;
-using TerraSharp.Maui.Example.ViewModels.Models;
 
 namespace TerraSharp.Maui.Example.ViewModels
 {
@@ -21,23 +20,30 @@ namespace TerraSharp.Maui.Example.ViewModels
     {
         public ObservableCollection<Log> Logs { get; set; } = new ObservableCollection<Log>();
         public ObservableCollection<Coin[]> Coins { get; set; } = new ObservableCollection<Coin[]>();
+        public ObservableValue ObservableValueLunc { get; set; } = new ObservableValue { Value = 0 };
+        public ObservableValue ObservableValueStaked { get; set; } = new ObservableValue { Value = 0 };
 
-        public IEnumerable<ISeries> Series { get; set; } = new GaugeBuilder()
-            .WithLabelsPosition(PolarLabelsPosition.Start)
-            .WithLabelFormatter(point => point.PrimaryValue + " " + point.Context.Series.Name)
-            .WithLabelsSize(20)
-            .WithInnerRadius(20)
-            .WithOffsetRadius(8)
-            .WithBackgroundInnerRadius(20)
-            //.AddValue(100, "*")
-            .AddValue(39.5, "USTC")
-            .AddValue(923.78, "LUNC")
-            .BuildSeries();
+        public ObservableValue ObservableValueTotal { get; set; } = new ObservableValue { Value = 0 };
 
-        public string _ApplicationName;
+        public IEnumerable<ISeries> Series { get; set; } 
+
+    public string _ApplicationName;
 
         public MainViewModel()
         {
+            //ObservableValueG = new ObservableValue { Value = 50 };
+            Series = new GaugeBuilder()
+                .WithLabelsSize(20)
+                .WithLabelsPosition(PolarLabelsPosition.Start)
+                .WithLabelFormatter(point => $"{point.PrimaryValue} {point.Context.Series.Name}")
+                .WithInnerRadius(20)
+                .WithOffsetRadius(8)
+                .WithBackgroundInnerRadius(20)
+                .WithLabelsPosition(PolarLabelsPosition.Start)
+                .AddValue(ObservableValueLunc, "Lunc")
+                .AddValue(ObservableValueStaked, "Staked")
+                .AddValue(ObservableValueTotal, "Total")
+                .BuildSeries();
         }
         public string ApplicationName
         {

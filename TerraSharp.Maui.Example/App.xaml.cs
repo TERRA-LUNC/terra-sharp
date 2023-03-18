@@ -1,6 +1,6 @@
 ﻿using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
-using TerraSharp.Maui.Example.ViewModels.Models;
+
 
 namespace TerraSharp.Maui.Example
 {
