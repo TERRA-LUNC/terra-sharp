@@ -16,6 +16,7 @@ using Terra.Microsoft.Rest.Tx.Block;
 using TerraSharp.Core;
 using TerraSharp.Maui.Example.Data;
 using TerraSharp.Maui.Example.Models;
+using TerraSharp.Maui.Example.Pages.Components;
 using TerraSharp.Maui.Example.ViewModels;
 using TerraSharp.Maui.Example.ViewModels.Helpers;
 
@@ -28,6 +29,7 @@ namespace TerraSharp.Maui.Example.Pages
         public MainPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             TerraStartup.InitializeKernel(Terra.Microsoft.Rest.Configuration.Environment.TerraEnvironment.LUNA2TestNet);
 
         }
@@ -59,8 +61,7 @@ namespace TerraSharp.Maui.Example.Pages
                 var coins = await TerraServices.GetBalances(mnemonic.AccAddress);
                 var stakedCoins = await TerraServices.GetStaked(mnemonic.AccAddress);
                 vm.ObservableValueStaked.Value = stakedCoins.FirstOrDefault() == null ? 0 : stakedCoins.FirstOrDefault().balance.amount;
-
-
+                vm.CurrentAddress = mnemonic.AccAddress;
                 foreach (var coin in coins)
                 {
 
@@ -124,33 +125,34 @@ namespace TerraSharp.Maui.Example.Pages
             vm = new MainViewModel();
             collectionView.ItemsSource = vm.Logs;
             pieChart1.BindingContext = vm;
+            //pageHeader1.BindingContext = vm;
 
 
 
             WalletsDatabase wdb = new WalletsDatabase();
-            var existingLogs = await wdb.GetLogsAsync();
+            //var existingLogs = await wdb.GetLogsAsync();
 
-            foreach (var existingLog in existingLogs)
-            {
-                vm.Logs.Add(existingLog);
-            }
+            //foreach (var existingLog in existingLogs)
+            //{
+            //    vm.Logs.Add(existingLog);
+            //}
 
-            vm.Logs.Add(new Models.Log
-            {
-                Created = DateTime.Now,
-                Details = "Application started",
-                Message = "Start",
-                Type = LogTypes.Information,
-            });
+            //vm.Logs.Add(new Models.Log
+            //{
+            //    Created = DateTime.Now,
+            //    Details = "Application started",
+            //    Message = "Start",
+            //    Type = LogTypes.Information,
+            //});
 
 
-            await wdb.SaveLogItemAsync(new Models.Log
-            {
-                Created = DateTime.Now,
-                Details = "Application started",
-                Message = "Start",
-                Type = LogTypes.Information
-            });
+            //await wdb.SaveLogItemAsync(new Models.Log
+            //{
+            //    Created = DateTime.Now,
+            //    Details = "Application started",
+            //    Message = "Start",
+            //    Type = LogTypes.Information
+            //});
 
         }
     }

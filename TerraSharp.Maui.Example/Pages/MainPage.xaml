@@ -6,100 +6,193 @@
              xmlns:viewmodel="clr-namespace:TerraSharp.Maui.Example.ViewModels"
              xmlns:model="clr-namespace:TerraSharp.Maui.Example.Models"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:components="clr-namespace:TerraSharp.Maui.Example.Pages.Components"
              x:DataType="viewmodel:MainViewModel"
-             BackgroundColor="{DynamicResource BackgroundColor}" Title="Dashboard">
-  
-    <ScrollView >
-        
-        <VerticalStackLayout
-            
-            VerticalOptions="Start">
-            <!--<ActivityIndicator IsRunning="true" 
-                   Color="{DynamicResource  PrimaryColor}" />-->
-            <Button
+             BackgroundColor="{DynamicResource BackgroundColor}" >
+
+    <Grid RowDefinitions="70,180,*,60">
+
+        <components:PageHeader x:Name="pageHeader1" Grid.Row="0" HeightRequest="70" ></components:PageHeader>
+
+        <Button Grid.Row="0"
                 x:Name="CounterBtn"
                 Text="Test"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="End"  VerticalOptions="Center" WidthRequest="96" HeightRequest="96"/>
-            <Picker x:Name="picker" HorizontalOptions="Center" VerticalOptions="Center"
+        <!--<Picker x:Name="picker" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0"
               Title="Select a wallet" >
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Baboon</x:String>
-                        <x:String>Capuchin Monkey</x:String>
-                        <x:String>Blue Monkey</x:String>
-                        <x:String>Squirrel Monkey</x:String>
-                        <x:String>Golden Lion Tamarin</x:String>
-                        <x:String>Howler Monkey</x:String>
-                        <x:String>Japanese Macaque</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Baboon</x:String>
+                    <x:String>Capuchin Monkey</x:String>
+                    <x:String>Blue Monkey</x:String>
+                    <x:String>Squirrel Monkey</x:String>
+                    <x:String>Golden Lion Tamarin</x:String>
+                    <x:String>Howler Monkey</x:String>
+                    <x:String>Japanese Macaque</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>-->
+        <FlexLayout Grid.Row="1"
+            
+            VerticalOptions="Start">
+            <!--<ActivityIndicator IsRunning="true" 
+                   Color="{DynamicResource  PrimaryColor}" />-->
+            
+            
             <Grid ColumnDefinitions="*,*,*"  >
                 <lvc:PieChart x:Name="pieChart1" Series="{Binding Series}" InitialRotation="45" Total="{Binding ObservableValueTotal}" MaxAngle="270" 
-                              LegendPosition="Bottom"  WidthRequest="220" HeightRequest="220" >
+                              LegendPosition="Bottom"  WidthRequest="180" HeightRequest="180" >
                 </lvc:PieChart>
                 <Image Grid.Column="1" Source="icons8transfertdargent96.png"  WidthRequest="96" HeightRequest="96" ></Image>
                 <Image Grid.Column="2" Source="icons8demandedargent96.png"  WidthRequest="96" HeightRequest="96"></Image>
 
             </Grid>
 
-            <CollectionView x:Name="collectionView" 
-                        
+
+        </FlexLayout>
+        <CollectionView x:Name="collectionView"  Grid.Row="2"                     
                         SelectionMode="Single" >
-                <CollectionView.Header>
-                    <Grid ColumnDefinitions=".25*,.25*, .15*, .15*,*" Padding="18,0,0,0" BackgroundColor="{DynamicResource  PrimaryColor}">
-                        <Label Text="Date" Grid.Column="0" HorizontalTextAlignment="Start" TextColor="{DynamicResource  TextColor}"/>
-                        <Label Text="Type" Grid.Column="1" TextColor="{DynamicResource  TextColor}"/>
-                        <Label Text="Message" Grid.Column="2" TextColor="{DynamicResource  TextColor}"/>
-                        <Label Text="" Grid.Column="3" TextColor="{DynamicResource  TextColor}"/>
-                        <Label Text="Details" Grid.Column="4" TextColor="{DynamicResource  TextColor}"/>
-                    </Grid>
-                </CollectionView.Header>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate >
+            <!--<CollectionView.Header>
+                <Grid ColumnDefinitions=".25*,.25*, .15*, .15*,*" Padding="18,0,0,0" BackgroundColor="{DynamicResource  PrimaryColor}">
+                    --><!--<Label Text="Date" Grid.Column="0" HorizontalTextAlignment="Start" TextColor="{DynamicResource  TextColor}" HeightRequest="40" />--><!--
+                    <Label Text="Type" Grid.Column="1" TextColor="{DynamicResource  TextColor}"/>
+                    <Label Text="Message" Grid.Column="2" TextColor="{DynamicResource  TextColor}"/>
+                    <Label Text="" Grid.Column="3" TextColor="{DynamicResource  TextColor}"/>
+                    <Label Text="Details" Grid.Column="4" TextColor="{DynamicResource  TextColor}"/>
+                </Grid>
+            </CollectionView.Header>-->
+            <CollectionView.ItemTemplate>
+                <DataTemplate >
 
-                        <SwipeView>
+                    <SwipeView>
 
-                            <SwipeView.RightItems>
-                                <SwipeItems>
-                                    <SwipeItem Text="Delete" IconImageSource="delete.png"
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" IconImageSource="delete.png"
                                            BackgroundColor="{DynamicResource DeleteButtonColor}"
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteCommand}"
                                            CommandParameter="{Binding .}"/>
-                                </SwipeItems>
-                            </SwipeView.RightItems>
-                            <Grid >
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid >
 
-                                <Frame BackgroundColor="Transparent" >
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer 
+                            <Frame BackgroundColor="Transparent" >
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
                                            CommandParameter="{Binding .}"/>
-                                    </Frame.GestureRecognizers>
-                                    <Grid x:DataType="model:Log" ColumnDefinitions=".25*,.25*, .15*, .15*,*"  >
-                                        <Label Grid.Column="0"  Text="{Binding Path=Created, StringFormat='{}{0:dd.MM.yyyy HH.mm}'}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body" HorizontalTextAlignment="Start"/>
-                                        <Label Grid.Column="1"  Text="{Binding  Type}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>
-                                        <Label Grid.Column="2"  Text="{Binding Message}"  TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>
-                                        <!--Workaround Todo, svg from remote currently not supported in image component-->
-                                        <WebView Grid.Column="3" WidthRequest="22" HeightRequest="22"  Source="{Binding Image}"/>
-                                        <Label Grid.Column="4"  Text="{Binding  Details}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body" />
-                                        
-                                        
-                                    
+                                </Frame.GestureRecognizers>
+                                <Grid x:DataType="model:Log" ColumnDefinitions="*,*, *"  >
+                                    <!--<Label Grid.Column="0"  Text="{Binding Path=Created, StringFormat='{}{0:dd.MM.yyyy HH.mm}'}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body" HorizontalTextAlignment="Start"/>-->
+                                    <!--<Label Grid.Column="1"  Text="{Binding  Type}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>-->
+                                    <Label Grid.Column="0"  Text="{Binding Message}"  TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body"/>
+                                    <!--Workaround Todo, svg from remote currently not supported in image component-->
+                                    <WebView Grid.Column="1" WidthRequest="22" HeightRequest="22"  Source="{Binding Image}"/>
+                                    <Label Grid.Column="2"  Text="{Binding  Details}" TextColor="{DynamicResource PrimaryTextColor}" FontSize="Body" />
 
-                                    </Grid>
-                                </Frame>
-                            </Grid>
-                        </SwipeView>
-                    </DataTemplate>
 
-                </CollectionView.ItemTemplate>
 
-            </CollectionView>
 
-        </VerticalStackLayout>
-    </ScrollView>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+        <Grid Grid.Row="3"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand"
+              ColumnDefinitions="*,*,*,*"
+              Padding="5"
+              BackgroundColor="{StaticResource PrimaryColor}">
+            <VerticalStackLayout HorizontalOptions="Center">
+                <Label Text="&#xee30;"
+                       FontFamily="FluentFilled"
+                       TextColor="{StaticResource TextColor}"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       WidthRequest="30"
+                       HeightRequest="30"
+                       FontSize="30"/>
+                <Label Text="Wallet"
+                       TextColor="{StaticResource TextColor}"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       FontSize="11"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout HorizontalOptions="Center"
+                                 Grid.Column="1">
+                <Label Text="&#xf190;"
+                       FontFamily="FluentRegular"
+                       TextColor="{StaticResource TextColor}"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       WidthRequest="30"
+                       HeightRequest="30"
+                       FontSize="30"/>
+                <Label Text="Swap"
+                       TextColor="{StaticResource TextColor}"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       FontSize="11"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout HorizontalOptions="Center"
+                                Grid.Column="2">
+                <Label Text="&#xf07b;"
+                       FontFamily="FluentRegular"
+                       TextColor="{StaticResource TextColor}"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       WidthRequest="30"
+                       HeightRequest="30"
+                       FontSize="30"/>
+                <Label Text="Stake"
+                       TextColor="{StaticResource TextColor}"
+                       FontSize="11"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout HorizontalOptions="Center"
+                                Grid.Column="3">
+                <Label Text="&#xf561;"
+                       FontFamily="FluentRegular"
+                       TextColor="{StaticResource TextColor}"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       WidthRequest="30"
+                       HeightRequest="30"
+                       FontSize="30"/>
+                <Label Text="More"
+                       TextColor="{StaticResource TextColor}"
+                       FontSize="11"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+
+    </Grid>
 
 </ContentPage>

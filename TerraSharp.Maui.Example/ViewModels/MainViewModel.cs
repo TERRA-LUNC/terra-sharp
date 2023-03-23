@@ -27,7 +27,9 @@ namespace TerraSharp.Maui.Example.ViewModels
 
         public IEnumerable<ISeries> Series { get; set; } 
 
-    public string _ApplicationName;
+        public string _ApplicationName;
+        public string _CurrentAddress;
+        public string _CurrentEnvironnement;
 
         public MainViewModel()
         {
@@ -55,6 +57,32 @@ namespace TerraSharp.Maui.Example.ViewModels
             {
                 _ApplicationName = value;
                 OnNotifyPropertyChanged(nameof(ApplicationName));
+            }
+        }
+
+        public string CurrentAddress
+        {
+            get
+            {
+                return _CurrentAddress;
+            }
+            set
+            {
+                _CurrentAddress = value;
+                OnNotifyPropertyChanged(nameof(CurrentAddress));
+            }
+        }
+
+        public string CurrentEnvironnement
+        {
+            get
+            {
+                return _CurrentEnvironnement;
+            }
+            set
+            {
+                _CurrentEnvironnement = value;
+                OnNotifyPropertyChanged(nameof(CurrentEnvironnement));
             }
         }
 

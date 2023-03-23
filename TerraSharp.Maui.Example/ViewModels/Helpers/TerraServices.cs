@@ -54,5 +54,13 @@ namespace TerraSharp.Maui.Example.ViewModels.Helpers
             var stakedLunc = TerraStartup.GetLCDClient().staking.GetDelegations(accAddress);
             return stakedLunc;
         }
+
+        public static Task GetHistory()
+        {
+
+            //var history = TerraStartup.GetLCDClient()//history.GetHistory();
+            return null;
+
+        }
     }
 }

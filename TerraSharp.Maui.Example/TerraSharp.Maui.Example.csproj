@@ -54,6 +54,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\FluentSystemIcons-Filled.ttf" />
+    <None Remove="Resources\Fonts\FluentSystemIcons-Regular.ttf" />
     <None Remove="Resources\Fonts\Gotham-Bold.ttf" />
     <None Remove="Resources\Fonts\Gotham-Book.ttf" />
     <None Remove="Resources\Fonts\Gotham-Light.ttf" />
@@ -136,6 +138,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <MauiXaml Update="Pages\Components\PageHeader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Pages\More.xaml">
       <Generator></Generator>
     </MauiXaml>
@@ -159,5 +164,11 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\Components\PageHeader.xaml.cs">
+      <DependentUpon>PageHeader.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

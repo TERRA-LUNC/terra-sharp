@@ -10,6 +10,8 @@ namespace TerraSharp.Maui.Example
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
+
             builder
                 .UseSkiaSharp(true)
                 .UseMauiApp<App>()
@@ -19,6 +21,8 @@ namespace TerraSharp.Maui.Example
                     fonts.AddFont("Gotham-Medium.ttf", "Gotham-Medium");
                     fonts.AddFont("Gotham-Bold.ttf", "Gotham-Bold");
                     fonts.AddFont("Gotham-Book.ttf", "Gotham-Book");
+                    fonts.AddFont("FluentSystemIcons-Filled.ttf", "FluentFilled");
+                    fonts.AddFont("FluentSystemIcons-Regular.ttf", "FluentRegular");
                 });
 
             builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);

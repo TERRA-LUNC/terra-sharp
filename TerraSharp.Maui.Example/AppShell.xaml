@@ -4,15 +4,16 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TerraSharp.Maui.Example.Pages"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Disabled" >
 
-    <TabBar Shell.TabBarBackgroundColor="{DynamicResource PrimaryColor}" Shell.ForegroundColor="{DynamicResource Shell.ForegroundColor}">
+    <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+    <!--<TabBar Shell.TabBarBackgroundColor="{DynamicResource PrimaryColor}" Shell.ForegroundColor="{DynamicResource Shell.ForegroundColor}">
 
-        <Tab Title="WALLET" Icon="wallet.png">
+        --><!--<Tab Title="WALLET" Icon="wallet.png">
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
-        </Tab>
+        </Tab>-->
         
-        <Tab Title="SWAP">
+        <!--<Tab Title="SWAP">
             <ShellContent ContentTemplate="{DataTemplate local:Swap}" />
         </Tab>
         
@@ -22,7 +23,7 @@
         
         <Tab Title="MORE">
             <ShellContent ContentTemplate="{DataTemplate local:More}" />
-        </Tab>
-    </TabBar>
+        </Tab>--><!--
+    </TabBar>-->
 
 </Shell>
