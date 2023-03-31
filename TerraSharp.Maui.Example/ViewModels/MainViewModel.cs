@@ -30,7 +30,7 @@ namespace TerraSharp.Maui.Example.ViewModels
         public string _ApplicationName;
         public string _CurrentAddress;
         public string _CurrentEnvironnement;
-
+        public string _Url;
         public MainViewModel()
         {
             //ObservableValueG = new ObservableValue { Value = 50 };
@@ -70,6 +70,19 @@ namespace TerraSharp.Maui.Example.ViewModels
             {
                 _CurrentAddress = value;
                 OnNotifyPropertyChanged(nameof(CurrentAddress));
+            }
+        }
+
+        public string Url
+        {
+            get
+            {
+                return _Url;
+            }
+            set
+            {
+                _Url = value;
+                OnNotifyPropertyChanged(nameof(Url));
             }
         }
 

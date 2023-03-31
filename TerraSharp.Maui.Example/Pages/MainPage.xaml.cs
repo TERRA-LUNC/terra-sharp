@@ -43,51 +43,12 @@ namespace TerraSharp.Maui.Example.Pages
             BlockTxBroadcastResultDataArgs result = new BlockTxBroadcastResultDataArgs();
             Task.Run(async () =>
             {
-
-                //Name = "test2",
-                //Address = "terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp",
-                //Pubkey = "terrapub1addwnpepqdw9s9agjmw4fgntfuytd2x7qha94zlvv0edntkt7g3amz4wg75ewy9755w",
-                //Mnemonic = "quality vacuum heart guard buzz spike sight swarm shove special gym robust assume sudden deposit grid alcohol choice devote leader tilt noodle tide penalty"
-
                 // Create a key out of a mnemonic
                 var mnemonic = new TxMnemonic("desert excite employ minute exile flash finish inmate bleak alter bid raise resource spatial crumble spread toddler exit inflict soup real draft analyst illegal");
-
                 // Define the recipient address
                 var rAddr = "terra1g9flaqfprlx2a62nm4k9c80u5e4alv8ghk6nwr";
-
                 // Define your wallet -- The account that will handle the transactions
                 var wallet = TerraServices.CreateWallet(mnemonic);
-
-                var coins = await TerraServices.GetBalances(mnemonic.AccAddress);
-                var stakedCoins = await TerraServices.GetStaked(mnemonic.AccAddress);
-                vm.ObservableValueStaked.Value = stakedCoins.FirstOrDefault() == null ? 0 : stakedCoins.FirstOrDefault().balance.amount;
-                vm.CurrentAddress = mnemonic.AccAddress;
-                foreach (var coin in coins)
-                {
-
-                    var options = CoinDenomExtension.GetCoinDenomOptions(coin.denom);
-
-                    vm.ObservableValueLunc.Value = coin.amount / 1e6;
-
-                    if (options != null)
-                    {
-
-                        vm.Logs.Add(new Models.Log
-                        {
-                            Created = DateTime.Now,
-                            Details = options.Description,
-                            Message = Convert.ToDecimal(coin.amount / 1000000).ToString(),
-                            Type = LogTypes.Bank,
-                            Image = options.ImageUrl
-                        });
-
-
-                    }
-
-
-                }
-                vm.ObservableValueTotal.Value = vm.ObservableValueStaked.Value + vm.ObservableValueLunc.Value;
-
                 var send = new MsgSend(
                   mnemonic.AccAddress,
                   rAddr,
@@ -123,9 +84,49 @@ namespace TerraSharp.Maui.Example.Pages
         private async void ContentPage_Loaded(object sender, EventArgs e)
         {
             vm = new MainViewModel();
+            Task.Run(async () =>
+            {
+                // Create a key out of a mnemonic
+                var mnemonic = new TxMnemonic("desert excite employ minute exile flash finish inmate bleak alter bid raise resource spatial crumble spread toddler exit inflict soup real draft analyst illegal");
+
+                // Define your wallet -- The account that will handle the transactions
+                var wallet = TerraServices.CreateWallet(mnemonic);
+
+                var coins = await TerraServices.GetBalances(mnemonic.AccAddress);
+                var stakedCoins = await TerraServices.GetStaked(mnemonic.AccAddress);
+                vm.ObservableValueStaked.Value = stakedCoins.FirstOrDefault() == null ? 0 : stakedCoins.FirstOrDefault().balance.amount;
+                vm.CurrentAddress = mnemonic.AccAddress;
+                vm.Url = "https://finder.terra.money/classic/address/" + mnemonic.AccAddress;
+                foreach (var coin in coins)
+                {
+
+                    var options = CoinDenomExtension.GetCoinDenomOptions(coin.denom);
+
+                    vm.ObservableValueLunc.Value = coin.amount / 1e6;
+
+                    if (options != null)
+                    {
+
+                        vm.Logs.Add(new Models.Log
+                        {
+                            Created = DateTime.Now,
+                            Details = options.Description,
+                            Message = Convert.ToDecimal(coin.amount / 1000000).ToString(),
+                            Type = LogTypes.Bank,
+                            Image = options.ImageUrl
+                        });
+
+
+                    }
+
+                }
+            }).Wait(); 
+                
+            vm.ObservableValueTotal.Value = vm.ObservableValueStaked.Value + vm.ObservableValueLunc.Value;
+
             collectionView.ItemsSource = vm.Logs;
             pieChart1.BindingContext = vm;
-            //pageHeader1.BindingContext = vm;
+            pageHeader1.BindingContext = vm;
 
 
 

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TerraSharp.Maui.Example.Pages.Components.PageHeader" >
+             x:Class="TerraSharp.Maui.Example.Pages.Components.PageHeader" 
+             xmlns:components="clr-namespace:TerraSharp.Maui.Example.Pages.Components">
     
         <Grid ColumnDefinitions="*,*" Margin="5">
         <Border Stroke="#C49B33" Margin="2" Grid.Column="0" HeightRequest="45"
@@ -15,6 +16,7 @@
             <Label x:Name="lblEnvir" Text="Classic" TextColor="{DynamicResource TextColor}" FontSize="Body"        
            FontAttributes="Bold" />
         </Border>
+            
         <Border Stroke="#C49B33" Margin="2" Grid.Column="1" HeightRequest="45"
         StrokeThickness="0"
         Background="{DynamicResource PrimaryColor}" 
@@ -23,9 +25,11 @@
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="30,30,30,30" />
             </Border.StrokeShape>
-            <Label x:Name="lblAddress" Text="terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp" TextColor="{DynamicResource TextColor}" FontSize="Body"   
-           FontAttributes="Bold" />
+            <components:HyperlinkLabel x:Name="lblAddress" 
+                                       Text="{Binding CurrentAddress}" TextColor="{DynamicResource TextColor}" FontSize="Body" 
+                                       FontAttributes="Bold" Url="{Binding Url}" />
         </Border>
+        
     </Grid>
         
     

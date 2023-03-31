@@ -39,14 +39,32 @@
             VerticalOptions="Start">
             <!--<ActivityIndicator IsRunning="true" 
                    Color="{DynamicResource  PrimaryColor}" />-->
-            
-            
+
+
             <Grid ColumnDefinitions="*,*,*"  >
                 <lvc:PieChart x:Name="pieChart1" Series="{Binding Series}" InitialRotation="45" Total="{Binding ObservableValueTotal}" MaxAngle="270" 
-                              LegendPosition="Bottom"  WidthRequest="180" HeightRequest="180" >
+                              LegendPosition="Bottom"  WidthRequest="180" HeightRequest="180" Grid.Column="0" >
                 </lvc:PieChart>
-                <Image Grid.Column="1" Source="icons8transfertdargent96.png"  WidthRequest="96" HeightRequest="96" ></Image>
-                <Image Grid.Column="2" Source="icons8demandedargent96.png"  WidthRequest="96" HeightRequest="96"></Image>
+
+                <Label Text="&#xe0bf;"
+                       Grid.Column="1" 
+                       FontFamily="FluentRegular"
+                       TextColor="{StaticResource PrimaryTextColor}"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       FontSize="60"/>
+                <Label Text="&#xe0c4;"
+                       Grid.Column="2" 
+                       FontFamily="FluentRegular"
+                       TextColor="{StaticResource PrimaryTextColor}"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       FontSize="60"/>
+
 
             </Grid>
 
@@ -56,7 +74,9 @@
                         SelectionMode="Single" >
             <!--<CollectionView.Header>
                 <Grid ColumnDefinitions=".25*,.25*, .15*, .15*,*" Padding="18,0,0,0" BackgroundColor="{DynamicResource  PrimaryColor}">
-                    --><!--<Label Text="Date" Grid.Column="0" HorizontalTextAlignment="Start" TextColor="{DynamicResource  TextColor}" HeightRequest="40" />--><!--
+                    -->
+            <!--<Label Text="Date" Grid.Column="0" HorizontalTextAlignment="Start" TextColor="{DynamicResource  TextColor}" HeightRequest="40" />-->
+            <!--
                     <Label Text="Type" Grid.Column="1" TextColor="{DynamicResource  TextColor}"/>
                     <Label Text="Message" Grid.Column="2" TextColor="{DynamicResource  TextColor}"/>
                     <Label Text="" Grid.Column="3" TextColor="{DynamicResource  TextColor}"/>
