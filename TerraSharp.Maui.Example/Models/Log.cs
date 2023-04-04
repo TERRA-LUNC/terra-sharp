@@ -40,5 +40,6 @@ namespace TerraSharp.Maui.Example.Models
         public const string Wallet = "Wallet";
         public const string Transaction = "Transaction";
         public const string Broadcast = "Broadcast";
+        public const string Exchange = "Exchange";
     }
 }

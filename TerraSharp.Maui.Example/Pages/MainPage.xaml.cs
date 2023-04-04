@@ -91,8 +91,24 @@ namespace TerraSharp.Maui.Example.Pages
 
                 // Define your wallet -- The account that will handle the transactions
                 var wallet = TerraServices.CreateWallet(mnemonic);
+                var closedOrders = CryptoExchangeServices.GetClosedOrdersAsync();
+
+                foreach (var closedOrder in closedOrders.Result.Data.ToList())
+                {
+
+                    vm.Logs.Add(new Models.Log
+                    {
+                        Created = closedOrder.Timestamp,
+                        Details = closedOrder.QuantityFilled.ToString(),
+                        Message = closedOrder.Price.ToString(),
+                        Type = LogTypes.Exchange,
+
+                    });
+
+                }
 
                 var coins = await TerraServices.GetBalances(mnemonic.AccAddress);
+
                 var stakedCoins = await TerraServices.GetStaked(mnemonic.AccAddress);
                 vm.ObservableValueStaked.Value = stakedCoins.FirstOrDefault() == null ? 0 : stakedCoins.FirstOrDefault().balance.amount;
                 vm.CurrentAddress = mnemonic.AccAddress;
@@ -120,8 +136,8 @@ namespace TerraSharp.Maui.Example.Pages
                     }
 
                 }
-            }).Wait(); 
-                
+            }).Wait();
+
             vm.ObservableValueTotal.Value = vm.ObservableValueStaked.Value + vm.ObservableValueLunc.Value;
 
             collectionView.ItemsSource = vm.Logs;
