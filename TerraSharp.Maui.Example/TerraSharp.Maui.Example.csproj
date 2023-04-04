@@ -102,6 +102,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Binance.Net" Version="8.4.3" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
     <PackageReference Include="Crypto.RIPEMD" Version="1.0.3" />
     <PackageReference Include="Cryptography.ECDSA.Secp256k1" Version="1.1.3" />
